@@ -4,7 +4,7 @@
 
 ## File structure
 
-- [bin](bin) - binaries in rust
+- [cli](cli) - binaries in rust
 - [src](src) - testing out rust code
   - [main.rs](src/main.rs) - main entry point
 - [try](try) - testing out rust projects
