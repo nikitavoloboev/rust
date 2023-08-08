@@ -55,6 +55,8 @@ Join [Discord](https://discord.com/invite/TVafwaD23d) for more indepth discussio
   - `bun run test` will run test suite, make tests pass
 - copy [this test](https://github.com/learn-anything/electron-version/blob/main/test/wiki.test.ts) in rust and make it pass
 - add nix
+- try setup basic rust CLI
+  - try [ratatui](https://github.com/ratatui-org/ratatui)
 
 ### ♥️
 
