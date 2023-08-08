@@ -1,0 +1,12 @@
+[package]
+name = "axum"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dotenvy = "0.15.7"
+dotenvy_macro = "0.15.7"
+openai-api-rs = "0.1.6"
+tokio = "1.28.0"
