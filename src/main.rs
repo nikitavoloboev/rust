@@ -5,7 +5,7 @@ mod markdown;
 mod test;
 mod wiki;
 
-use crate::learn::learn;
+use learn::run;
 use rusqlite::{Connection, Result};
 use std::fs;
 use std::path::Path;
@@ -18,7 +18,7 @@ struct Wiki {
 
 fn main() {
     // init_sqlite_db_with_wiki_folder_path(folder_path); // TODO: should be safe to run
-    learn();
+    run();
 }
 
 fn init_sqlite_db_with_wiki_folder_path(folder_path: &str) {
