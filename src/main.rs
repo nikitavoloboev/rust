@@ -1,11 +1,12 @@
 #![allow(dead_code)]
 
-mod learn;
+mod learn {
+    pub mod basics;
+}
 mod markdown;
 mod test;
 mod wiki;
 
-use learn::run;
 use rusqlite::{Connection, Result};
 use std::fs;
 use std::path::Path;
@@ -17,8 +18,9 @@ struct Wiki {
 }
 
 fn main() {
+    learn::basics::run();
     // init_sqlite_db_with_wiki_folder_path(folder_path); // TODO: should be safe to run
-    run();
+    // run();
 }
 
 fn init_sqlite_db_with_wiki_folder_path(folder_path: &str) {

@@ -1,12 +1,11 @@
 pub fn run() {
-    // learn_function_overloading();
+    println!("testing");
 }
 
 fn exercise_implicit_conversions() {
-    let x: i8 = 15;
-    let y: i16 = 1000;
-
-    println!("{x} * {y} = {}", multiply(x, y));
+    // let x: i8 = 15;
+    // let y: i16 = 1000;
+    // println!("{x} * {y} = {}", multiply(x, y));
 }
 
 fn multiply(x: i16, y: i16) -> i16 {
@@ -16,7 +15,7 @@ fn multiply(x: i16, y: i16) -> i16 {
 fn learn_function_overloading() {
     println!("coin toss: {}", pick_one("heads", "tails"));
     println!("cash prize: {}", pick_one(500, 1000));
-    println!("My pid is {}", process::id());
+    // println!("My pid is {}", process::id());
 }
 
 fn pick_one<T>(a: T, b: T) -> T {
