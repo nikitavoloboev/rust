@@ -1,11 +1,13 @@
 pub fn run() {
-    println!("testing");
-}
+    let mut v = Vec::new();
+    v.push((10, false));
+    v.push((20, true));
+    println!("v: {v:?}");
 
-fn exercise_implicit_conversions() {
-    // let x: i8 = 15;
-    // let y: i16 = 1000;
-    // println!("{x} * {y} = {}", multiply(x, y));
+    let vv = v.iter().collect::<std::collections::HashSet<_>>();
+
+    println!("test");
+    println!("vv: {vv:?}");
 }
 
 fn multiply(x: i16, y: i16) -> i16 {
