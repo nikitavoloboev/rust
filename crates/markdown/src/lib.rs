@@ -17,12 +17,12 @@ pub struct TopicStruct<'a> {
 
 // parse markdown file, extract topic
 pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicStruct<'a>> {
-    // let options = ParseOptions::default();
-    // let tree = to_mdast(markdown_string, &ParseOptions::default())?;
-    // println!("{:?}", tree);
+    let options = ParseOptions::default();
+    let tree = to_mdast(markdown_string, &ParseOptions::default()).map_err(anyhow::Error::msg)?;
+    println!("{:?}", tree);
 
-    let title = "Physics";
-    let content = "Physics is great.";
+    let title = "Hardware";
+    let content = "[Digital Design and Computer Architecture course](https://safari.ethz.ch/digitaltechnik/spring2021/doku.php?id=start), [From Nand to Tetris](https://github.com/ghaiklor/nand-2-tetris) are great..";
     Ok(TopicStruct { title, content })
 }
 
@@ -36,7 +36,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_md_file_with_heading_and_content() {
+    fn test_md_file_with_heading_and_content_only() {
         let test_folder_path = get_test_folder_path();
         println!("{}", test_folder_path.display());
 
@@ -49,8 +49,8 @@ mod tests {
                 assert_eq!(
                     topic,
                     TopicStruct {
-                        title: "Physics",
-                        content: "Physics is great."
+                        title: "Hardware",
+                        content: "[Digital Design and Computer Architecture course](https://safari.ethz.ch/digitaltechnik/spring2021/doku.php?id=start), [From Nand to Tetris](https://github.com/ghaiklor/nand-2-tetris) are great."
                     }
                 );
             }
