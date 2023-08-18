@@ -9,7 +9,7 @@ pub fn get_test_folder_path() -> PathBuf {
     let new_path = current_dir
         .to_str()
         .expect("Failed to convert path to string")
-        .replace("/run", "/seed/wiki/test");
+        .replace("/crates/markdown", "/seed/wiki/test");
 
     // Convert the new path back to a PathBuf
     PathBuf::from(new_path)

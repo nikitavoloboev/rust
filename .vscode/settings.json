@@ -3,10 +3,6 @@
     "./bin/stdout-capture/Cargo.toml",
     "./Cargo.toml",
     "./try/zero2prod/Cargo.toml",
-    "./crates/markdown/Cargo.toml",
-    "./crates/markdown/Cargo.toml",
-    "./crates/markdown/Cargo.toml",
-    "./crates/markdown/Cargo.toml",
     "./crates/markdown/Cargo.toml"
   ]
 }

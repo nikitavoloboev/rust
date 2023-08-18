@@ -22,7 +22,7 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
     // println!("{:?}", tree);
 
     let title = "Physics";
-    let content = "Physics is great";
+    let content = "Physics is great.";
     Ok(TopicStruct { title, content })
 }
 
@@ -38,21 +38,21 @@ mod tests {
     #[test]
     fn test_md_file_with_heading_and_content() {
         let test_folder_path = get_test_folder_path();
+        println!("{}", test_folder_path.display());
 
         // Attempt to convert to a str, will return None if the path is not valid UTF-8
         if let Some(path_str) = test_folder_path.to_str() {
             let paths = get_md_files(path_str);
             if !paths.is_empty() {
                 let content = get_content_of_file(&paths[0]);
-                let topic = parse_md_content_as_topic(&content);
-                println!("{}", "runs");
-                // assert_eq!(
-                //     topic,
-                //     TopicStruct {
-                //         title: "Physics",
-                //         content: "Physics is great."
-                //     }
-                // );
+                let topic = parse_md_content_as_topic(&content).unwrap();
+                assert_eq!(
+                    topic,
+                    TopicStruct {
+                        title: "Physics",
+                        content: "Physics is great."
+                    }
+                );
             }
         } else {
             println!("Path is not valid UTF-8");
