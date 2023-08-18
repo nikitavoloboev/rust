@@ -3,9 +3,6 @@
 mod learn {
     pub mod basics;
 }
-mod markdown;
-mod test;
-mod wiki;
 
 use rusqlite::{Connection, Result};
 use std::fs;
