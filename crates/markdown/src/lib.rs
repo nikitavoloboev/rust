@@ -28,8 +28,8 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
     let mut collecting_content = false;
 
     while let Some(node) = nodes.pop_front() {
-        match node {
-            Node::Heading(ref heading) => {
+        match &node {
+            Node::Heading(heading) => {
                 if title.is_none() {
                     title = Some(
                         heading
@@ -48,7 +48,7 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
                     collecting_content = false;
                 }
             }
-            Node::Paragraph(ref para) => {
+            Node::Paragraph(para) => {
                 if collecting_content {
                     content.push_str(
                         &para
@@ -56,7 +56,14 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
                             .iter()
                             .map(|child| match child {
                                 Node::Text(text) => text.value.clone(),
-                                Node::Link(link) => link.url.clone(),
+                                Node::Link(link) => {
+                                    if let Node::Text(text) = &link.children[0] {
+                                        format!("[{}]({})", text.value, link.url)
+                                    // keep the whole link intact
+                                    } else {
+                                        String::new() // Or handle other types of children if needed
+                                    }
+                                }
                                 _ => String::new(),
                             })
                             .collect::<Vec<String>>()
