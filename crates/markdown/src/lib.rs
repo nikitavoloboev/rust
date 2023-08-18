@@ -3,27 +3,83 @@
 #![allow(unused_variables)]
 
 use anyhow::Result;
-use markdown::{to_mdast, ParseOptions};
+use markdown::{mdast::Node, to_mdast, ParseOptions};
+use std::{collections::VecDeque, net::SocketAddr};
 
 mod test;
 mod wiki;
 
 // TODO: &'a looks ugly, is there a better way?
 #[derive(Debug, PartialEq)]
-pub struct TopicStruct<'a> {
-    title: &'a str,
-    content: &'a str,
+pub struct TopicStruct {
+    title: String,
+    content: String,
 }
 
 // parse markdown file, extract topic
-pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicStruct<'a>> {
+pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicStruct> {
     let options = ParseOptions::default();
-    let tree = to_mdast(markdown_string, &ParseOptions::default()).map_err(anyhow::Error::msg)?;
-    println!("{:?}", tree);
+    let ast = to_mdast(markdown_string, &options).map_err(anyhow::Error::msg)?;
+    let mut nodes = VecDeque::new();
+    nodes.push_back(ast);
 
-    let title = "Hardware";
-    let content = "[Digital Design and Computer Architecture course](https://safari.ethz.ch/digitaltechnik/spring2021/doku.php?id=start), [From Nand to Tetris](https://github.com/ghaiklor/nand-2-tetris) are great..";
-    Ok(TopicStruct { title, content })
+    let mut title = None;
+    let mut content = String::new();
+    let mut collecting_content = false;
+
+    while let Some(node) = nodes.pop_front() {
+        match node {
+            Node::Heading(ref heading) => {
+                if title.is_none() {
+                    title = Some(
+                        heading
+                            .children
+                            .iter()
+                            .map(|child| match child {
+                                Node::Text(text) => text.value.clone(),
+                                _ => String::new(),
+                            })
+                            .collect::<Vec<String>>()
+                            .join(" "),
+                    );
+                    collecting_content = true;
+                } else {
+                    // Found another heading, we can stop collecting content
+                    collecting_content = false;
+                }
+            }
+            Node::Paragraph(ref para) => {
+                if collecting_content {
+                    content.push_str(
+                        &para
+                            .children
+                            .iter()
+                            .map(|child| match child {
+                                Node::Text(text) => text.value.clone(),
+                                Node::Link(link) => link.url.clone(),
+                                _ => String::new(),
+                            })
+                            .collect::<Vec<String>>()
+                            .join(" "),
+                    );
+                    content.push('\n');
+                }
+            }
+            _ => {}
+        }
+
+        if let Some(children) = node.children() {
+            for child in children.iter().cloned() {
+                nodes.push_back(child);
+            }
+        }
+    }
+
+    let title_str = title.ok_or_else(|| anyhow::Error::msg("Failed to extract title"))?;
+    Ok(TopicStruct {
+        title: title_str,
+        content: content.trim().to_string(),
+    })
 }
 
 #[cfg(test)]
@@ -49,8 +105,8 @@ mod tests {
                 assert_eq!(
                     topic,
                     TopicStruct {
-                        title: "Hardware",
-                        content: "[Digital Design and Computer Architecture course](https://safari.ethz.ch/digitaltechnik/spring2021/doku.php?id=start), [From Nand to Tetris](https://github.com/ghaiklor/nand-2-tetris) are great."
+                        title: "Hardware".to_string(),
+                        content: "[Digital Design and Computer Architecture course](https://safari.ethz.ch/digitaltechnik/spring2021/doku.php?id=start), [From Nand to Tetris](https://github.com/ghaiklor/nand-2-tetris) are great.".to_string()
                     }
                 );
             }
