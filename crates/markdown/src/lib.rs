@@ -20,6 +20,8 @@ pub struct TopicStruct {
 pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicStruct> {
     let options = ParseOptions::default();
     let ast = to_mdast(markdown_string, &options).map_err(anyhow::Error::msg)?;
+    println!("{:?}", ast);
+
     let mut nodes = VecDeque::new();
     nodes.push_back(ast);
 
@@ -35,9 +37,12 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
                         heading
                             .children
                             .iter()
-                            .map(|child| match child {
-                                Node::Text(text) => text.value.clone(),
-                                _ => String::new(),
+                            .filter_map(|child| {
+                                if let Node::Text(text) = child {
+                                    Some(text.value.clone())
+                                } else {
+                                    None
+                                }
                             })
                             .collect::<Vec<String>>()
                             .join(" "),
@@ -50,28 +55,27 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
             }
             Node::Paragraph(para) => {
                 if collecting_content {
-                    content.push_str(
-                        &para
-                            .children
-                            .iter()
-                            .map(|child| match child {
-                                Node::Text(text) => text.value.clone(),
-                                Node::Link(link) => {
-                                    if let Node::Text(text) = &link.children[0] {
-                                        format!("[{}]({})", text.value, link.url)
-                                    // keep the whole link intact
-                                    } else {
-                                        String::new() // Or handle other types of children if needed
-                                    }
+                    let para_content = para
+                        .children
+                        .iter()
+                        .map(|child| match child {
+                            Node::Text(text) => text.value.trim().to_string(),
+                            Node::Link(link) => {
+                                if let Node::Text(text) = &link.children[0] {
+                                    format!("[{}]({})", text.value.trim(), link.url)
+                                } else {
+                                    String::new()
                                 }
-                                _ => String::new(),
-                            })
-                            .collect::<Vec<String>>()
-                            .join(" "),
-                    );
+                            }
+                            _ => String::new(),
+                        })
+                        .collect::<Vec<String>>()
+                        .join(" ");
+                    content.push_str(&para_content);
                     content.push('\n');
                 }
             }
+
             _ => {}
         }
 
