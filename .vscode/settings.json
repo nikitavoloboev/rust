@@ -3,12 +3,8 @@
     "./bin/stdout-capture/Cargo.toml",
     "./Cargo.toml",
     "./try/zero2prod/Cargo.toml",
-    "./crates/markdown/Cargo.toml",
     "./try/alfred/github/Cargo.toml",
-    "./Cargo.toml",
-    "./Cargo.toml",
     "./crates/log_macro/Cargo.toml",
-    "./crates/log_macro/Cargo.toml",
-    "./crates/log_macro/Cargo.toml"
+    "./crates/la_rust/Cargo.toml"
   ]
 }

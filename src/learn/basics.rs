@@ -4,8 +4,6 @@ pub fn run() {
 
 fn collect_into_hashmap() {
     let animals = vec!["cat", "dog", "horse", "zebra"];
-
-    // Collect into a HashSet
     let set: std::collections::HashSet<_> = animals.into_iter().collect();
     log!(set);
 
