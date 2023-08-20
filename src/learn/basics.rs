@@ -1,7 +1,5 @@
 pub fn run() {
-    let animals = vec!["cat", "dog", "horse", "zebra"];
-    let set: std::collections::HashSet<_> = animals.into_iter().collect();
-    log!(set);
+    collect_into_hashmap();
 }
 
 fn collect_into_hashmap() {
@@ -9,14 +7,23 @@ fn collect_into_hashmap() {
 
     // Collect into a HashSet
     let set: std::collections::HashSet<_> = animals.into_iter().collect();
-    println!("set: {:?}", set);
-    // log!(set);
-    // dbg!(set);
+    log!(set);
 
     // Collect chars into a String
     let chars = ['h', 'e', 'l', 'l', 'o'];
     let greeting: String = chars.into_iter().collect();
-    println!("{}", greeting);
+    log!(greeting);
+}
+
+fn logging() {
+    let animals = vec!["cat", "dog", "horse", "zebra"];
+    // this seemingly logs most everything
+    println!("{:?}", animals);
+    // this logs it with more info like file and line number and the name of var, not just value
+    // commented it out as if I leave it, then log! below wont work (borrow of moved value)
+    // dbg!(animals);
+    // this is custom macro that just logs the variable name and value
+    log!(animals);
 }
 
 fn collect() {
