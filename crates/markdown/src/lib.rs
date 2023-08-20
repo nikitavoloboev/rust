@@ -76,6 +76,7 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
                             .children
                             .iter()
                             .filter_map(|child| {
+                                println!("child: {:?}", child);
                                 if let Node::Text(text) = child {
                                     Some(text.value.clone())
                                 } else {
@@ -93,11 +94,11 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
             }
             Node::Paragraph(para) => {
                 if collecting_content {
-                    let para_content = para
+                    let para_content_vec: Vec<String> = para
                         .children
                         .iter()
                         .map(|child| match child {
-                            Node::Text(text) => text.value.trim().to_string(),
+                            Node::Text(text) => text.value.to_string(),
                             Node::Link(link) => {
                                 if let Node::Text(text) = &link.children[0] {
                                     format!("[{}]({})", text.value.trim(), link.url)
@@ -107,10 +108,12 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
                             }
                             _ => String::new(),
                         })
-                        .collect::<Vec<String>>()
-                        .join(" ");
+                        .collect();
+
+                    let para_content = para_content_vec.join(" ").trim().to_string();
+
                     content.push_str(&para_content);
-                    content.push('\n');
+                    content.push(' ');
                 }
             }
 

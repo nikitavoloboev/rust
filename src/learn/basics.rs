@@ -1,4 +1,74 @@
 pub fn run() {
+    let animals = vec!["cat", "dog", "horse", "zebra"];
+    let set: std::collections::HashSet<_> = animals.into_iter().collect();
+    log!(set);
+}
+
+fn collect_into_hashmap() {
+    let animals = vec!["cat", "dog", "horse", "zebra"];
+
+    // Collect into a HashSet
+    let set: std::collections::HashSet<_> = animals.into_iter().collect();
+    println!("set: {:?}", set);
+    // log!(set);
+    // dbg!(set);
+
+    // Collect chars into a String
+    let chars = ['h', 'e', 'l', 'l', 'o'];
+    let greeting: String = chars.into_iter().collect();
+    println!("{}", greeting);
+}
+
+fn collect() {
+    let iter = (1..=5).into_iter();
+
+    let vec: Vec<_> = iter.collect();
+
+    println!("{:?}", vec); // [1, 2, 3, 4, 5]
+}
+
+fn map() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // Use map to double each number
+    let doubled: Vec<_> = numbers.iter().map(|&x| x * 2).collect();
+
+    println!("{:?}", doubled); // [2, 4, 6, 8, 10]
+}
+
+fn filter_map() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // Double the even numbers, discard the odd numbers
+    let doubled_evens: Vec<_> = numbers
+        .iter()
+        .filter_map(|&x| if x % 2 == 0 { Some(x * 2) } else { None })
+        .collect();
+
+    println!("{:?}", doubled_evens); // Outputs: [4, 8]
+}
+
+fn iter() {
+    // Create a vector of integers
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    // Use .iter() to obtain an iterator over the vector
+    let mut iterator = numbers.iter();
+
+    // Use .next() to get the next item from the iterator
+    // This will return Some(&1), since 1 is the first item
+    println!("{:?}", iterator.next());
+
+    // Use .next() again, this time it will return Some(&2)
+    println!("{:?}", iterator.next());
+
+    // We can also loop through all elements using a for loop
+    for num in numbers.iter() {
+        println!("{}", num);
+    }
+}
+
+fn vec() {
     let mut v = Vec::new();
     v.push((10, false));
     v.push((20, true));

@@ -1,8 +1,11 @@
 #![allow(dead_code)]
 
-mod learn {
-    pub mod basics;
-}
+// TODO: maybe bad idea to have macro be globally available like this
+// not sure how to do it nicer, can do selective imports potentially
+#[macro_use]
+mod macros;
+
+mod learn;
 
 use rusqlite::{Connection, Result};
 use std::fs;
