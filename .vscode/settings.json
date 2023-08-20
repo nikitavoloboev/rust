@@ -6,6 +6,9 @@
     "./crates/markdown/Cargo.toml",
     "./try/alfred/github/Cargo.toml",
     "./Cargo.toml",
-    "./Cargo.toml"
+    "./Cargo.toml",
+    "./crates/log_macro/Cargo.toml",
+    "./crates/log_macro/Cargo.toml",
+    "./crates/log_macro/Cargo.toml"
   ]
 }
