@@ -16,6 +16,31 @@ pub struct TopicStruct {
     content: String,
 }
 
+// Equivalent of TypeScript's 'Note' type
+#[derive(Debug, Clone)]
+pub struct Note {
+    note: String,
+    subnotes: Vec<String>,
+    url: Option<String>,
+    public: Option<bool>, // TODO: should be not optional, temp for testing
+}
+
+// Equivalent of TypeScript's 'Link' type
+#[derive(Debug, Clone)]
+pub struct Link {
+    title: String,
+    url: String,
+    public: Option<bool>, // TODO: should be not optional, temp for testing
+    description: Option<String>,
+    related_links: Vec<RelatedLink>,
+}
+
+#[derive(Debug, Clone)]
+pub struct RelatedLink {
+    // Define fields for RelatedLink
+    // For now, it's empty, but you can add fields as per your requirements
+}
+
 // parse markdown file, extract topic
 pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicStruct> {
     let options = ParseOptions::default();
@@ -25,15 +50,28 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
     let mut nodes = VecDeque::new();
     nodes.push_back(ast);
 
-    let mut title = None;
+    // let mut topic_name = None;
+    let mut pretty_topic_name = None;
     let mut content = String::new();
     let mut collecting_content = false;
+
+    // let topicName = path.basename(filePath, path.extname(filePath))
+    // let prettyTopicName
+    // let content = ""
+    // let notes: Note[] = []
+    // let links: Link[] = []
+
+    // let parsingNotes = false
+    // let parsingLinks = false
+    // let parsingFrontMatter = false
+    // let gotTitleFromFrontMatter = false
+    // let gotTitle = false
 
     while let Some(node) = nodes.pop_front() {
         match &node {
             Node::Heading(heading) => {
-                if title.is_none() {
-                    title = Some(
+                if pretty_topic_name.is_none() {
+                    pretty_topic_name = Some(
                         heading
                             .children
                             .iter()
@@ -86,7 +124,8 @@ pub fn parse_md_content_as_topic<'a>(markdown_string: &'a str) -> Result<TopicSt
         }
     }
 
-    let title_str = title.ok_or_else(|| anyhow::Error::msg("Failed to extract title"))?;
+    let title_str =
+        pretty_topic_name.ok_or_else(|| anyhow::Error::msg("Failed to extract title"))?;
     Ok(TopicStruct {
         title: title_str,
         content: content.trim().to_string(),
