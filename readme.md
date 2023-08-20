@@ -9,6 +9,11 @@
   - [main.rs](src/main.rs) - main entry point
 - [try](try) - testing out rust projects
 
+## Published rust crates
+
+- [log_macro](https://github.com/nikitavoloboev/log_macro) - Macro to print variable name and value only (stripped from release builds)
+- [la_rust](https://github.com/learn-anything/rust) - Rust crates for learn-anything
+
 ## Setup
 
 Everything is driven using [bun](https://bun.sh/) commands.
