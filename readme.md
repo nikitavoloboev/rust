@@ -9,10 +9,10 @@
   - [main.rs](src/main.rs) - main entry point
 - [try](try) - testing out rust projects
 
-## Published rust crates
+## Published crates
 
 - [log_macro](https://github.com/nikitavoloboev/log_macro) - Macro to print variable name and value only (stripped from release builds)
-- [la_rust](https://github.com/learn-anything/rust) - Rust crates for learn-anything
+<!-- - [la_rust](https://github.com/learn-anything/rust) - Rust crates for learn-anything -->
 
 ## Setup
 
@@ -40,7 +40,9 @@ Runs: `cargo watch -q -- sh -c "tput reset && cargo test -q"`
 
 ## Publish crates
 
-> TODO:
+```
+cargo publish
+```
 
 ## Contribute
 
@@ -54,11 +56,6 @@ Join [Discord](https://discord.com/invite/TVafwaD23d) for more indepth discussio
 
 ## Tasks
 
-- move markdown-parsing/sqlite/tinybase code from [LA electron code](https://github.com/learn-anything/electron-version)
-  - [rusqlite](https://github.com/rusqlite/rusqlite) for sqlite
-  - [markdown-rs](https://github.com/wooorm/markdown-rs) for markdown parsing
-  - `bun run test` will run test suite, make tests pass
-- copy [this test](https://github.com/learn-anything/electron-version/blob/main/test/wiki.test.ts) in rust and make it pass
 - add nix
 - try setup basic rust CLI
   - try [ratatui](https://github.com/ratatui-org/ratatui)
