@@ -3,3 +3,4 @@ target/
 run/test.db
 seed
 bin/stdout-capture/output.txt
+crates/log_macro
