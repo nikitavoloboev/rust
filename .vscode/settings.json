@@ -5,6 +5,7 @@
     "./try/zero2prod/Cargo.toml",
     "./try/alfred/github/Cargo.toml",
     "./crates/log_macro/Cargo.toml",
-    "./crates/la_rust/Cargo.toml"
+    "./crates/la_rust/Cargo.toml",
+    "./cli/la/Cargo.toml"
   ]
 }
