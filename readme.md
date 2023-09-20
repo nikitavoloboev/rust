@@ -7,7 +7,6 @@
 - [cli](cli) - CLIs in rust
 - [src](src) - testing out rust code
   - [main.rs](src/main.rs) - main entry point
-- [try](try) - testing out rust projects
 
 ## Published crates
 
