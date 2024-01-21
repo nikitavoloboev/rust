@@ -1,6 +1,6 @@
 # Rust
 
-> Rust crates + testing code
+> Rust crates and other code
 
 ## File structure
 
