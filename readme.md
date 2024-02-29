@@ -15,14 +15,16 @@
 
 ## Setup
 
-Everything is driven using [bun](https://bun.sh/) commands.
+<!-- TODO: add nix setup -->
 
-Assumes [rust](https://www.rust-lang.org/tools/install) is installed.
+[Bun](https://bun.sh/) is used to run things.
+
+Assumes [rust](https://www.rust-lang.org/tools/install) with [cargo](https://doc.rust-lang.org/cargo/) is installed.
 
 ## Run
 
 ```
-bun run dev
+bun dev
 ```
 
 Runs: `cargo watch -q -- sh -c "tput reset && cargo run -q"`
