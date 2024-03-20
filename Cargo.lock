@@ -515,6 +515,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "dot"
+version = "0.1.0"
+dependencies = [
+ "log_macro",
+]
+
+[[package]]
 name = "dotenvy"
 version = "0.15.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"

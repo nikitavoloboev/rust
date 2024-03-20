@@ -1,3 +1,4 @@
+workspace = { members = ["cli/dot"] }
 [package]
 name = "learn"
 version = "0.1.0"
@@ -29,3 +30,6 @@ walkdir = "2"
 markdown = "1.0.0-alpha.11"
 anyhow = "1.0.72"
 log_macro = "0.1.6"
+
+[profile.dev]
+debug = 0
