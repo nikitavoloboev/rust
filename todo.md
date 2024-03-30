@@ -1,3 +1,7 @@
+## Do
+
+- code in `src/run` breaks for some reason when trying to call from main.rs, fix
+
 ## Try
 
 - https://github.com/deontologician/openai-api-rust
