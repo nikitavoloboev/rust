@@ -10,51 +10,57 @@ pub fn html_from_url(url: &str) -> Result<String, Box<dyn std::error::Error>> {
     let clean_markdown = clean_markdown(&markdown);
     log!(clean_markdown);
     log!("---");
-    Ok(markdown)
+    Ok(clean_markdown)
 }
 
 pub fn clean_markdown(markdown: &str) -> String {
     let mut cleaned_lines = Vec::new();
 
     for line in markdown.lines() {
-        let trimmed_line = line.trim();
+        let mut cleaned_line = line.trim().to_string();
 
         // Skip empty lines and lines starting with certain characters
-        if trimmed_line.is_empty()
-            || trimmed_line.starts_with('#')
-            || trimmed_line.starts_with('-')
-            || trimmed_line.starts_with('|')
-            || trimmed_line.starts_with('>')
-            || trimmed_line.starts_with('[')
-            || trimmed_line.starts_with('<')
-            || trimmed_line.starts_with('`')
+        if cleaned_line.is_empty()
+            || cleaned_line.starts_with('#')
+            || cleaned_line.starts_with('-')
+            || cleaned_line.starts_with('|')
+            || cleaned_line.starts_with('>')
+            || cleaned_line.starts_with('[')
+            || cleaned_line.starts_with('<')
+            || cleaned_line.starts_with('`')
         {
             continue;
         }
 
         // Remove any remaining Markdown formatting
-        let cleaned_line = trimmed_line
-            .replace("**", "")
-            .replace("__", "")
-            .replace("*", "")
-            .replace("_", "")
-            .replace("`", "")
-            .replace("~", "")
-            .replace(":", "")
-            .replace("|", "")
-            .replace("[", "")
-            .replace("]", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("<", "")
-            .replace(">", "")
-            .trim()
-            .to_string();
+        cleaned_line = cleaned_line.replace("**", "");
+        cleaned_line = cleaned_line.replace("__", "");
+        cleaned_line = cleaned_line.replace("*", "");
+        cleaned_line = cleaned_line.replace("_", "");
+        cleaned_line = cleaned_line.replace("`", "");
+        cleaned_line = cleaned_line.replace("~", "");
+        cleaned_line = cleaned_line.replace(":", "");
+        cleaned_line = cleaned_line.replace("|", "");
+        cleaned_line = cleaned_line.replace("[", "");
+        cleaned_line = cleaned_line.replace("]", "");
+        cleaned_line = cleaned_line.replace("(", "");
+        cleaned_line = cleaned_line.replace(")", "");
+        cleaned_line = cleaned_line.replace("<", "");
+        cleaned_line = cleaned_line.replace(">", "");
+        cleaned_line = cleaned_line.trim().to_string();
 
-        // Add the cleaned line to the vector if it's not empty
-        if !cleaned_line.is_empty() {
-            cleaned_lines.push(cleaned_line);
+        // Skip lines that contain only special characters or numbers
+        if !cleaned_line.chars().any(|c| c.is_alphabetic()) {
+            continue;
         }
+
+        // Remove consecutive whitespace and replace with a single space
+        cleaned_line = cleaned_line
+            .split_whitespace()
+            .collect::<Vec<_>>()
+            .join(" ");
+
+        cleaned_lines.push(cleaned_line);
     }
 
     // Join the cleaned lines into a single string
