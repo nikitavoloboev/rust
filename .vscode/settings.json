@@ -7,5 +7,6 @@
     "./crates/log_macro/Cargo.toml",
     "./crates/la_rust/Cargo.toml",
     "./cli/la/Cargo.toml"
-  ]
+  ],
+  "rust-analyzer.showUnlinkedFileNotification": false
 }

@@ -3,6 +3,9 @@
 #[macro_use]
 extern crate log_macro;
 
+mod run;
+
 fn main() {
-    log!("wow");
+    run::mdka();
+    log!("done");
 }
