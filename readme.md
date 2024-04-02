@@ -2,7 +2,7 @@
 
 > Rust crates and other code
 
-## File structure
+## Files
 
 - [cli](cli) - CLIs in rust
 - [src](src) - testing out rust code
