@@ -1,6 +1,18 @@
 use mdka::from_html;
 use reqwest::blocking::get;
 
+// let url = "https://github.com/teamhanko/hanko/blob/main/frontend/elements/README.md";
+pub fn fetch_and_print_markdown_from_url(url: &str) {
+    match html_from_url(url) {
+        Ok(markdown) => {
+            println!("{}", markdown);
+        }
+        Err(e) => {
+            eprintln!("Error: {}", e);
+        }
+    }
+}
+
 pub fn html_from_url(url: &str) -> Result<String, Box<dyn std::error::Error>> {
     let response = get(url)?;
     let html = response.text()?;

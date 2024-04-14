@@ -4,5 +4,15 @@
     "test": "cargo watch -q -- sh -c \"tput reset && cargo test -q\"",
     "markdown-test": "cd crates/markdown && cargo watch -q -- sh -c \"tput reset && cargo test -q --lib\"",
     "seed-clone": "git clone https://github.com/learn-anything/seed"
+  },
+  "dependencies": {
+    "bun": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.12",
+    "watcher": "^2.3.0"
+  },
+  "prettier": {
+    "semi": false
   }
 }

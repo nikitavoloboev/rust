@@ -1,5 +1,11 @@
+# core
+.DS_Store
+node_modules
+.env
+.env*.local
+
+# other
 target/
-*.env
 run/test.db
 seed
 bin/stdout-capture/output.txt
