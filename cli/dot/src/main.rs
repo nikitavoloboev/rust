@@ -1,6 +1,16 @@
+use clap::Parser;
+
 #[macro_use]
 extern crate log_macro;
 
+#[derive(Parser, Debug)]
+struct Args {
+    // Define your command line arguments here
+    #[clap(short, long)]
+    example: String,
+}
+
 fn main() {
-    log!("test");
+    let args = Args::parse();
+    println!("Example argument value: {}", args.example);
 }

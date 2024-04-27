@@ -8,6 +8,8 @@ use std::io::{self, BufRead, BufReader, Read};
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
 
+// TODO: run the command passed as is but capture stdout and stderr
+// TODO: put it to clipboard automatically
 fn main() -> io::Result<()> {
     // Get the command-line arguments
     let args: Vec<String> = env::args().collect();

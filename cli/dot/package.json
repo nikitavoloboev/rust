@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "dev": "cargo watch -q -- sh -c \"tput reset && cargo run -q\""
+  }
+}
