@@ -1,5 +1,8 @@
+// https://fasterthanli.me/articles/a-half-hour-to-learn-rust is great
+
 pub fn run() {
-    collect_into_hashmap();
+    log!("test");
+    // collect_into_hashmap();
 }
 
 fn collect_into_hashmap() {

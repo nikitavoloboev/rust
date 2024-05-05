@@ -1,4 +1,4 @@
-workspace = { members = ["cli/dot"] }
+workspace = { members = ["cli/dot", "crates/rust_utils", "cli/stdout-capture", "cli/process"] }
 [package]
 name = "learn"
 version = "0.1.0"

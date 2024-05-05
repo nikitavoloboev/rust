@@ -1,8 +1,9 @@
 #![allow(dead_code)]
 
-#[macro_use]
-extern crate log_macro;
+// #[macro_use]
+// extern crate log_macro;
+mod basics;
 
 fn main() {
-    log!("test");
+    basics::run();
 }
