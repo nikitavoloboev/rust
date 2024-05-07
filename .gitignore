@@ -11,3 +11,4 @@ seed
 bin/stdout-capture/output.txt
 crates/la_rust
 crates/log_macro
+cli/stdout-capture
