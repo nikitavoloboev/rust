@@ -1570,6 +1570,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "shell-capture"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "dirs-next",
+ "log_macro",
+]
+
+[[package]]
 name = "signal-hook-registry"
 version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1607,15 +1616,6 @@ checksum = "ce305eb0b4296696835b71df73eb912e0f1ffd2556a501fcede6e0c50349191c"
 dependencies = [
  "libc",
  "windows-sys 0.52.0",
-]
-
-[[package]]
-name = "stdout-capture"
-version = "0.1.0"
-dependencies = [
- "clap",
- "dirs-next",
- "log_macro",
 ]
 
 [[package]]

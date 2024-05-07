@@ -4,12 +4,7 @@
 extern crate log_macro;
 
 fn main() {
-    log!("wow");
-    log!("test");
+    let animals = vec!["cat", "dog"]
+    let animals = vec!["cat", "dog"]
+    log!(animals);
 }
-
-// --
-// mod basics;
-// fn basics() {
-//     // basics::run();
-// }
