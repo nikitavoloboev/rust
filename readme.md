@@ -2,20 +2,11 @@
 
 > Rust crates and other code
 
-## Files
-
-- [cli](cli) - CLIs in rust
-- [src](src) - testing out rust code
-  - [main.rs](src/main.rs) - main entry point
-
 ## Published crates
 
 - [log_macro](https://github.com/nikitavoloboev/log_macro) - Macro to print variable(s) with values nicely (stripped from release builds)
-<!-- - [la_rust](https://github.com/learn-anything/rust) - Rust crates for learn-anything -->
 
 ## Setup
-
-<!-- TODO: add nix setup -->
 
 [Bun](https://bun.sh/) is used to run things.
 
