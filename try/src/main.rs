@@ -1,9 +1,9 @@
 #![allow(dead_code)]
 
-#[macro_use]
-extern crate log_macro;
+use log_macro::log;
 
 fn main() {
     let animals = vec!["dog"];
     log!(animals);
+    log!("test");
 }
