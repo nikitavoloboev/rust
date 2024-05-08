@@ -214,6 +214,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57bcfdad1b858c2db7c38303a6d2ad4dfaf5eb53dfeb0910128b2c26d6158503"
 
 [[package]]
+name = "log_macro"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41eac5c506e890ca59231beb23bf29c8d6058e1a7638bd24e877ea64bf024301"
+
+[[package]]
 name = "once_cell"
 version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -271,11 +277,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "stdout-capture"
+name = "shell-capture"
 version = "0.1.0"
 dependencies = [
  "clap",
  "dirs-next",
+ "log_macro",
 ]
 
 [[package]]

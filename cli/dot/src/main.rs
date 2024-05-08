@@ -12,5 +12,5 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    println!("Example argument value: {}", args.example);
+    log!(args.example);
 }

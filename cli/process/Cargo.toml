@@ -4,3 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+log_macro = "0.1.6"
+rust_utils = { path = "../../crates/rust_utils" }
