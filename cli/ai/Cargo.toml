@@ -1,7 +1,6 @@
 [package]
-name = "try"
+name = "ai"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-log_macro = "0.1.6"
