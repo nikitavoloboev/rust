@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "ai"
+name = "dot"
 version = "0.1.0"
