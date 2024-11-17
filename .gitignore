@@ -16,3 +16,5 @@ private-*
 past.*
 past-*
 scripts/run.ts
+
+lib/log-macro
