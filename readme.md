@@ -2,7 +2,7 @@
 
 ## Run
 
-Right now, learning rust through building a CLI in [cli/rust_cli/](cli/rust_cli/).
+Right now, learning rust through building a CLI in [cli/rust_cli](cli/rust_cli).
 
 Old rust repo is [here](https://github.com/nikitavoloboev/rust-test/tree/main/old).
 
