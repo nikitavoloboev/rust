@@ -1,0 +1,81 @@
+version: '3'
+
+vars:
+  bin_dir: "{{.HOME}}/bin"
+  bin_artifact: "flow"
+  bin_name: "flow-rs"
+
+tasks:
+  default:
+    desc: List available tasks.
+    silent: true
+    cmds:
+      - task --list
+
+  setup:
+    desc: Ensure Cargo is installed and download Flow CLI dependencies.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        if ! command -v cargo >/dev/null 2>&1; then
+          echo "Rust toolchain 'cargo' not found in PATH."
+          echo "Install it via https://www.rust-lang.org/tools/install"
+          exit 1
+        fi
+        cargo --version >/dev/null
+        repo_root="$PWD"
+        export CARGO_HOME="${CARGO_HOME:-$repo_root/.cargo_home}"
+        export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$repo_root/target}"
+        mkdir -p "$CARGO_HOME"
+        mkdir -p "$CARGO_TARGET_DIR"
+        if ! cargo fetch --manifest-path "$repo_root/cli/flow/Cargo.toml" >/dev/null; then
+          echo "Warning: unable to download Cargo dependencies; try again once network access is available."
+        fi
+        echo "you are setup"
+
+  flow:
+    desc: Run the Flow CLI (passes CLI args through).
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        repo_root="$PWD"
+        export CARGO_HOME="${CARGO_HOME:-$repo_root/.cargo_home}"
+        export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$repo_root/target}"
+        mkdir -p "$CARGO_HOME"
+        mkdir -p "$CARGO_TARGET_DIR"
+        cargo run --manifest-path "$repo_root/cli/flow/Cargo.toml"{{if .CLI_ARGS}} -- {{.CLI_ARGS}}{{end}}
+
+  dev:
+    desc: Alias for `task flow`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task flow -- {{.CLI_ARGS}}
+
+  run:
+    desc: Alias for `task flow`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task flow -- {{.CLI_ARGS}}
+
+  deploy:
+    desc: Build the Flow CLI binary and install it to ~/bin/flow-rs.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        repo_root="$PWD"
+        mkdir -p "{{.bin_dir}}"
+        export CARGO_HOME="${CARGO_HOME:-$repo_root/.cargo_home}"
+        export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$repo_root/target}"
+        mkdir -p "$CARGO_HOME"
+        mkdir -p "$CARGO_TARGET_DIR"
+        cargo build --manifest-path "$repo_root/cli/flow/Cargo.toml" --release
+        cp "$CARGO_TARGET_DIR/release/{{.bin_artifact}}" "{{.bin_dir}}/{{.bin_name}}"
+        chmod 755 "{{.bin_dir}}/{{.bin_name}}"
+        echo "Installed CLI to {{.bin_dir}}/{{.bin_name}}"
