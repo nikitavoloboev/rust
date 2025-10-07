@@ -4,6 +4,8 @@ vars:
   bin_dir: "{{.HOME}}/bin"
   bin_artifact: "flow"
   bin_name: "flow-rs"
+  ghostty_switch_name: "ghostty-switch"
+  ghostty_switch_dir: "{{.HOME}}/config/sh"
 
 tasks:
   default:
@@ -79,3 +81,13 @@ tasks:
         cp "$CARGO_TARGET_DIR/release/{{.bin_artifact}}" "{{.bin_dir}}/{{.bin_name}}"
         chmod 755 "{{.bin_dir}}/{{.bin_name}}"
         echo "Installed CLI to {{.bin_dir}}/{{.bin_name}}"
+
+  deploy-ghostty-switch:
+    desc: Install the ghostty-switch helper script to ~/bin/ghostty-switch.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        mkdir -p "{{.bin_dir}}"
+        install -m 755 "{{.ghostty_switch_dir}}/{{.ghostty_switch_name}}" "{{.bin_dir}}/{{.ghostty_switch_name}}"
+        echo "Installed ghostty-switch to {{.bin_dir}}/{{.ghostty_switch_name}}"
