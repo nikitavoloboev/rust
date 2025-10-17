@@ -58,9 +58,8 @@ fn handle_validate(path: &Path) -> Result<()> {
             gitignore_path.display()
         ));
     } else {
-        let gitignore_contents = fs::read_to_string(&gitignore_path).with_context(|| {
-            format!("Unable to read {}", gitignore_path.display())
-        })?;
+        let gitignore_contents = fs::read_to_string(&gitignore_path)
+            .with_context(|| format!("Unable to read {}", gitignore_path.display()))?;
 
         let has_core_comment = gitignore_contents
             .lines()

@@ -10,15 +10,15 @@ Run `task` to see all possible commands.
 
 ## `flow` CLI
 
-[flow](https://github.com/nikitavoloboev/flow) repo explains purpose of flow well. See [cli/flow](cli/flow) for its code.
+`flow` is a CLI as a dump of various commands written in Go that are useful to me. See [cli/flow](cli/flow) for its code/docs.
 
-To install `flow-rs` & put it in your PATH, run `task install-flow`.
+Run `task deploy` to install `flow-rs` into PATH. It also puts `fs` command in path (my own personal shorthand, but you can change it).
 
 ## Libraries
 
 All library code is in `lib/` (currently git ignored as there is only one library there in separate repo).
 
-- [log_macro](https://github.com/nikitavoloboev/log_macro) - Macro to print variable(s) with values nicely
+- [log_macro](https://github.com/nikivdev/log_macro) - Macro to print variable(s) with values nicely
 
 ## Contributing
 
@@ -26,4 +26,4 @@ Any PR to improve is welcome. [codex](https://github.com/openai/codex) & [cursor
 
 ### 🖤
 
-[![Discord](https://go.nikiv.dev/badge-discord)](https://go.nikiv.dev/discord) [![X](https://go.nikiv.dev/badge-x)](https://x.com/nikitavoloboev) [![nikiv.dev](https://go.nikiv.dev/badge-nikiv)](https://nikiv.dev)
+[![Discord](https://go.nikiv.dev/badge-discord)](https://go.nikiv.dev/discord) [![X](https://go.nikiv.dev/badge-x)](https://x.com/nikivdev) [![nikiv.dev](https://go.nikiv.dev/badge-nikiv)](https://nikiv.dev)
